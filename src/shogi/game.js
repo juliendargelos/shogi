@@ -7,6 +7,7 @@ class Game {
     this.player2 = Player.from(player2)
     this.currentPlayer = null
     this.board = new Board()
+    this.pieces = []
     this.randomizePlayers()
   }
 
@@ -32,6 +33,30 @@ class Game {
 
   get over() {
     return this.state === this.constructor.checkmate
+  }
+
+  get usedPieces() {
+    return this.board.cells.reduce((pieces, cell) => {
+      if(cell.piece) pieces.push(cell.piece)
+      return pieces
+    }, [])
+  }
+
+  get capturedPieces() {
+    const usedPieces = this.usedPieces
+    return this.pieces.filter(piece => !usedPieces.includes(piece))
+  }
+
+  piecesOf(player) {
+    return this.pieces.filter(piece => piece.owner === player)
+  }
+
+  piecesUsedBy(player) {
+    return this.usedPieces.filter(piece => piece.owner === player)
+  }
+
+  piecesCapturedBy(player) {
+    return this.capturedPieces.filter(piece => piece.owner === player)
   }
 
   stateOf(player, checkmate = true) {
@@ -77,7 +102,7 @@ class Game {
     var game = new this.constructor(this.player1, this.player2)
     game.currentPlayer = this.currentPlayer
     game.board = this.board.clone()
-    game.pieces = game.board.pieces
+    game.pieces = game.usedPieces.concat(this.capturedPieces.map(piece => piece.clone()))
     return callback ? callback.call(this, game) : game
   }
 
@@ -93,6 +118,7 @@ class Game {
 
   start() {
     this.board.init({kingGeneral: this.kingGeneral, jeweledGeneral: this.jeweledGeneral})
+    this.pieces = this.usedPieces
     this.currentPlayer = this.firstPlayer
     return this
   }

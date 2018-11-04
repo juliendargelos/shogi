@@ -372,10 +372,32 @@ var Game = function () {
     this.player2 = _player2.default.from(player2);
     this.currentPlayer = null;
     this.board = new _board2.default();
+    this.pieces = [];
     this.randomizePlayers();
   }
 
   _createClass(Game, [{
+    key: 'piecesOf',
+    value: function piecesOf(player) {
+      return this.pieces.filter(function (piece) {
+        return piece.owner === player;
+      });
+    }
+  }, {
+    key: 'piecesUsedBy',
+    value: function piecesUsedBy(player) {
+      return this.usedPieces.filter(function (piece) {
+        return piece.owner === player;
+      });
+    }
+  }, {
+    key: 'piecesCapturedBy',
+    value: function piecesCapturedBy(player) {
+      return this.capturedPieces.filter(function (piece) {
+        return piece.owner === player;
+      });
+    }
+  }, {
     key: 'stateOf',
     value: function stateOf(player) {
       var _this = this;
@@ -431,7 +453,9 @@ var Game = function () {
       var game = new this.constructor(this.player1, this.player2);
       game.currentPlayer = this.currentPlayer;
       game.board = this.board.clone();
-      game.pieces = game.board.pieces;
+      game.pieces = game.usedPieces.concat(this.capturedPieces.map(function (piece) {
+        return piece.clone();
+      }));
       return callback ? callback.call(this, game) : game;
     }
   }, {
@@ -450,6 +474,7 @@ var Game = function () {
     key: 'start',
     value: function start() {
       this.board.init({ kingGeneral: this.kingGeneral, jeweledGeneral: this.jeweledGeneral });
+      this.pieces = this.usedPieces;
       this.currentPlayer = this.firstPlayer;
       return this;
     }
@@ -486,6 +511,22 @@ var Game = function () {
     key: 'over',
     get: function get() {
       return this.state === this.constructor.checkmate;
+    }
+  }, {
+    key: 'usedPieces',
+    get: function get() {
+      return this.board.cells.reduce(function (pieces, cell) {
+        if (cell.piece) pieces.push(cell.piece);
+        return pieces;
+      }, []);
+    }
+  }, {
+    key: 'capturedPieces',
+    get: function get() {
+      var usedPieces = this.usedPieces;
+      return this.pieces.filter(function (piece) {
+        return !usedPieces.includes(piece);
+      });
     }
   }], [{
     key: 'states',
@@ -1149,31 +1190,9 @@ var Board = function () {
     _classCallCheck(this, Board);
 
     this.cells = [];
-    this.pieces = [];
   }
 
   _createClass(Board, [{
-    key: 'piecesOf',
-    value: function piecesOf(player) {
-      return this.pieces.filter(function (piece) {
-        return piece.owner === player;
-      });
-    }
-  }, {
-    key: 'piecesUsedBy',
-    value: function piecesUsedBy(player) {
-      return this.usedPieces.filter(function (piece) {
-        return piece.owner === player;
-      });
-    }
-  }, {
-    key: 'piecesCapturedBy',
-    value: function piecesCapturedBy(player) {
-      return this.capturedPieces.filter(function (piece) {
-        return piece.owner === player;
-      });
-    }
-  }, {
     key: 'clone',
     value: function clone() {
       var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
@@ -1182,10 +1201,6 @@ var Board = function () {
       board.cells = this.cells.map(function (cell) {
         return cell.clone();
       });
-      board.pieces = this.capturedPieces.map(function (piece) {
-        return piece.clone();
-      }).concat(board.usedPieces);
-
       var pieces = board.cells.map(function (cell) {
         return cell.piece;
       });
@@ -1345,8 +1360,6 @@ var Board = function () {
         return [j.la, j.kn, j.si, j.go, j.ki, j.go, j.si, j.kn, j.la, null, j.ro, null, null, null, null, null, j.bi, null, j.pa, j.pa, j.pa, j.pa, j.pa, j.pa, j.pa, j.pa, j.pa, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, k.pa, k.pa, k.pa, k.pa, k.pa, k.pa, k.pa, k.pa, k.pa, null, k.bi, null, null, null, null, null, k.ro, null, k.la, k.kn, k.si, k.go, k.ki, k.go, k.si, k.kn, k.la];
       });
 
-      this.pieces = this.usedPieces;
-
       return this;
     }
   }, {
@@ -1358,22 +1371,6 @@ var Board = function () {
     key: 'height',
     get: function get() {
       return this.constructor.height;
-    }
-  }, {
-    key: 'usedPieces',
-    get: function get() {
-      return this.cells.reduce(function (pieces, cell) {
-        if (cell.piece) pieces.push(cell.piece);
-        return pieces;
-      }, []);
-    }
-  }, {
-    key: 'capturedPieces',
-    get: function get() {
-      var usedPieces = this.usedPieces;
-      return this.pieces.filter(function (piece) {
-        return !usedPieces.includes(piece);
-      });
     }
   }], [{
     key: 'width',

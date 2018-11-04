@@ -4,7 +4,6 @@ import Iterator from './iterator.js'
 class Board {
   constructor() {
     this.cells = []
-    this.pieces = []
   }
 
   get width() {
@@ -15,37 +14,9 @@ class Board {
     return this.constructor.height
   }
 
-  get usedPieces() {
-    return this.cells.reduce((pieces, cell) => {
-      if(cell.piece) pieces.push(cell.piece)
-      return pieces
-    }, [])
-  }
-
-  get capturedPieces() {
-    const usedPieces = this.usedPieces
-    return this.pieces.filter(piece => !usedPieces.includes(piece))
-  }
-
-  piecesOf(player) {
-    return this.pieces.filter(piece => piece.owner === player)
-  }
-
-  piecesUsedBy(player) {
-    return this.usedPieces.filter(piece => piece.owner === player)
-  }
-
-  piecesCapturedBy(player) {
-    return this.capturedPieces.filter(piece => piece.owner === player)
-  }
-
   clone(callback = null) {
     var board = new this.constructor()
     board.cells = this.cells.map(cell => cell.clone())
-    board.pieces = this.capturedPieces
-      .map(piece => piece.clone())
-      .concat(board.usedPieces)
-
     var pieces = board.cells.map(cell => cell.piece)
     var reset = () => board.cells.forEach((cell, index) => cell.piece = pieces[index])
 
@@ -168,8 +139,6 @@ class Board {
       null, k.bi, null, null, null, null, null, k.ro, null,
       k.la, k.kn, k.si, k.go, k.ki, k.go, k.si, k.kn, k.la
     ])
-
-    this.pieces = this.usedPieces
 
     return this
   }
