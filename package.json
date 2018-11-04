@@ -1,0 +1,46 @@
+{
+  "name": "@juliendargelos/shogi",
+  "version": "1.0.0",
+  "description": "A javascript shogi library.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "webpack --config webpack/config.js --colors",
+    "test": "webpack --config webpack/config.js --colors && node dist/test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juliendargelos/shogi.git"
+  },
+  "keywords": [
+    "shogi"
+  ],
+  "author": "juliendargelos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/juliendargelos/shogi/issues"
+  },
+  "homepage": "https://github.com/juliendargelos/shogi#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-es2015": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.2",
+    "css-loader": "^1.0.0",
+    "eslint": "^5.4.0",
+    "eslint-loader": "^2.1.0",
+    "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.2",
+    "node-sass": "^4.9.3",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.22.1",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5",
+    "webpack-merge": "^4.1.4"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0"
+  }
+}

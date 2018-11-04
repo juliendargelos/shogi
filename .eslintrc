@@ -1,0 +1,15 @@
+{
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "sourceType": "module",
+    "ecmaFeatures": {"modules": true},
+    "extends": "eslint:recommended"
+  },
+  "rules": {
+    "semi": ["warn", "never"]
+  }
+}
