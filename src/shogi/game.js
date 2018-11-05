@@ -96,13 +96,16 @@ class Game {
 
   move(piece, destination, promote = false) {
     if(piece instanceof Cell) piece = piece.piece
+
     if(
       this.over ||
       !piece ||
       piece.owner !== this.currentPlayer ||
       (promote && !this.promotable(piece, destination)) ||
       !this.movements(piece).includes(destination)
-    ) return false
+    ) {
+      return false
+    }
 
     if(destination.piece) {
       destination.piece.owner = piece.owner

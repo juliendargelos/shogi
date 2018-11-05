@@ -591,7 +591,7 @@ var game = new _index2.default.Game('Jane', 'Serge');
 
 game.start();
 
-game.move(game.board.cell(0, 6), game.board.cell(0, 5));
+console.log(game.move(game.board.cell(0, 6), game.board.cell(0, 5)));
 
 /***/ }),
 
@@ -1311,7 +1311,10 @@ var Game = function () {
       var promote = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
       if (piece instanceof _cell2.default) piece = piece.piece;
-      if (this.over || !piece || piece.owner !== this.currentPlayer || promote && !this.promotable(piece, destination) || !this.movements(piece).includes(destination)) return false;
+
+      if (this.over || !piece || piece.owner !== this.currentPlayer || promote && !this.promotable(piece, destination) || !this.movements(piece).includes(destination)) {
+        return false;
+      }
 
       if (destination.piece) {
         destination.piece.owner = piece.owner;
