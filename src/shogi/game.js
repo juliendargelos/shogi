@@ -95,7 +95,7 @@ class Game {
   }
 
   move(piece, destination, promote = false) {
-    if(piece instanceof Cell) piece = cell.piece
+    if(piece instanceof Cell) piece = piece.piece
     if(
       this.over ||
       !piece ||
