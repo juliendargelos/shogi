@@ -1623,4 +1623,4 @@ exports.default = Infinite;
 
 /***/ })
 
-/******/ })));
+/******/ })["default"]));

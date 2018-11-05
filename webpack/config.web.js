@@ -17,7 +17,6 @@ module.exports = merge(base, {
     ]
   },
   output: {
-    libraryExport: 'default',
     library: 'Shogi'
   },
   optimization: {

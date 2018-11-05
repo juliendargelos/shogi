@@ -7,7 +7,8 @@ module.exports = {
   stats: 'errors-only',
   output: {
     path: paths.output,
-    filename: '[name].js'
+    filename: '[name].js',
+    libraryExport: 'default'
   },
   resolve: {
     alias: {
