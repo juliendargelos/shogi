@@ -29,6 +29,10 @@ class Game {
     return this.kingGeneral
   }
 
+  get nextPlayer() {
+    return this.players.find(player => player !== this.currentPlayer)
+  }
+
   get state() {
     return this.stateOf(this.player1) || this.stateOf(this.player2)
   }
@@ -105,7 +109,7 @@ class Game {
       (!promote || this.promotable(origin.piece, destination.cell)) &&
       this.movements(origin.piece).includes(destination.cell) &&
       this.board.move(origin.piece, destination.cell, promote) &&
-      this.reversePlayers() &&
+      (this.currentPlayer = this.nextPlayer) &&
       true
     )
   }

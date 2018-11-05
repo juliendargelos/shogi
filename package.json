@@ -1,6 +1,6 @@
 {
   "name": "@juliendargelos/shogi",
-  "version": "5.5.0",
+  "version": "5.6.0",
   "description": "A javascript shogi library.",
   "main": "dist/index.js",
   "scripts": {
