@@ -3576,7 +3576,7 @@ var Game = function () {
       origin = this.board.resolve(origin);
       destination = this.board.resolve(destination);
 
-      return !this.over && origin.piece && origin.piece.owner === this.currentPlayer && (!promote || this.promotable(origin.piece, destination.cell)) && this.movements(origin.piece).includes(destination.cell) && this.board.move(origin.piece, destination.cell, promote) && this.reversePlayers() && true;
+      return !this.over && origin.piece && origin.piece.owner === this.currentPlayer && (!promote || this.promotable(origin.piece, destination.cell)) && this.movements(origin.piece).includes(destination.cell) && this.board.move(origin.piece, destination.cell, promote) && (this.currentPlayer = this.nextPlayer) && true;
     }
   }, {
     key: 'movements',
@@ -3712,6 +3712,24 @@ var Game = function () {
     key: 'firstPlayer',
     get: function get() {
       return this.kingGeneral;
+    }
+  }, {
+    key: 'secondPlayer',
+    get: function get() {
+      var _this5 = this;
+
+      return this.players.find(function (player) {
+        return player !== _this5.firstPlayer;
+      });
+    }
+  }, {
+    key: 'nextPlayer',
+    get: function get() {
+      var _this6 = this;
+
+      return this.players.find(function (player) {
+        return player !== _this6.currentPlayer;
+      });
     }
   }, {
     key: 'state',

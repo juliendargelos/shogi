@@ -29,6 +29,10 @@ class Game {
     return this.kingGeneral
   }
 
+  get secondPlayer() {
+    return this.players.find(player => player !== this.firstPlayer)
+  }
+
   get nextPlayer() {
     return this.players.find(player => player !== this.currentPlayer)
   }
