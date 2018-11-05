@@ -98,7 +98,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _piece = __webpack_require__(9);
+var _piece = __webpack_require__(6);
 
 var _piece2 = _interopRequireDefault(_piece);
 
@@ -150,7 +150,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _piece = __webpack_require__(9);
+var _piece = __webpack_require__(6);
 
 var _piece2 = _interopRequireDefault(_piece);
 
@@ -202,7 +202,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _piece = __webpack_require__(9);
+var _piece = __webpack_require__(6);
 
 var _piece2 = _interopRequireDefault(_piece);
 
@@ -259,7 +259,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _piece = __webpack_require__(9);
+var _piece = __webpack_require__(6);
 
 var _piece2 = _interopRequireDefault(_piece);
 
@@ -311,7 +311,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _piece = __webpack_require__(9);
+var _piece = __webpack_require__(6);
 
 var _piece2 = _interopRequireDefault(_piece);
 
@@ -363,7 +363,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _piece = __webpack_require__(9);
+var _piece = __webpack_require__(6);
 
 var _piece2 = _interopRequireDefault(_piece);
 
@@ -420,7 +420,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _piece = __webpack_require__(9);
+var _piece = __webpack_require__(6);
 
 var _piece2 = _interopRequireDefault(_piece);
 
@@ -477,7 +477,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _piece = __webpack_require__(9);
+var _piece = __webpack_require__(6);
 
 var _piece2 = _interopRequireDefault(_piece);
 
@@ -591,7 +591,8 @@ var game = new _index2.default.Game('Jane', 'Serge');
 
 game.start();
 
-console.log(game.move(game.board.cell(0, 6), game.board.cell(0, 5)));
+console.log(game.move([0, 6], [0, 5]));
+//console.log(game.board.cell(0, 5))
 
 /***/ }),
 
@@ -607,9 +608,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _piece = __webpack_require__(9);
+var _piece = __webpack_require__(6);
 
 var _piece2 = _interopRequireDefault(_piece);
 
@@ -639,7 +642,16 @@ var Cell = function () {
   }, {
     key: 'at',
     value: function at(x, y) {
-      if (x !== null && ((typeof x === 'undefined' ? 'undefined' : _typeof(x)) === 'object' || typeof x === 'function')) {
+      if (x instanceof _piece2.default) return this.piece === x;else if (Array.isArray(x)) {
+        ;
+
+        var _x3 = x;
+
+        var _x4 = _slicedToArray(_x3, 2);
+
+        x = _x4[0];
+        y = _x4[1];
+      }if (x !== null && ((typeof x === 'undefined' ? 'undefined' : _typeof(x)) === 'object' || typeof x === 'function')) {
         y = x.y;
         x = x.x;
       }
@@ -744,6 +756,10 @@ var _cell = __webpack_require__(44);
 
 var _cell2 = _interopRequireDefault(_cell);
 
+var _piece = __webpack_require__(6);
+
+var _piece2 = _interopRequireDefault(_piece);
+
 var _iterator = __webpack_require__(45);
 
 var _iterator2 = _interopRequireDefault(_iterator);
@@ -768,16 +784,7 @@ var Board = function () {
       board.cells = this.cells.map(function (cell) {
         return cell.clone();
       });
-      var pieces = board.cells.map(function (cell) {
-        return cell.piece;
-      });
-      var reset = function reset() {
-        return board.cells.forEach(function (cell, index) {
-          return cell.piece = pieces[index];
-        });
-      };
-
-      return callback ? callback.call(this, board, reset) : board;
+      return callback ? callback.call(this, board) : board;
     }
   }, {
     key: 'cell',
@@ -799,6 +806,35 @@ var Board = function () {
       return this.cells.filter(function (cell) {
         return cell.x === x;
       });
+    }
+  }, {
+    key: 'move',
+    value: function move(origin, destination) {
+      var promote = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+      origin = this.resolve(origin);
+      destination = this.resolve(destination);
+
+      if (!origin.piece || !destination.cell) return false;
+
+      if (destination.piece) {
+        destination.piece.owner = origin.piece.owner;
+        if (destination.piece.promoted) destination.piece.promoted = false;
+      }
+
+      destination.cell.piece = origin.piece;
+      if (promote) origin.piece.promoted = true;
+      if (origin.cell) origin.cell.piece = null;
+
+      return true;
+    }
+  }, {
+    key: 'resolve',
+    value: function resolve(object) {
+      var cell = this.cell(object);
+      var piece = cell ? cell.piece : object instanceof _piece2.default ? piece : null;
+
+      return { cell: cell, piece: piece };
     }
   }, {
     key: 'init',
@@ -945,7 +981,7 @@ exports.default = Player;
 
 /***/ }),
 
-/***/ 9:
+/***/ 6:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1125,7 +1161,7 @@ var _infinite = __webpack_require__(99);
 
 var _infinite2 = _interopRequireDefault(_infinite);
 
-var _piece = __webpack_require__(9);
+var _piece = __webpack_require__(6);
 
 var _piece2 = _interopRequireDefault(_piece);
 
@@ -1307,60 +1343,34 @@ var Game = function () {
     }
   }, {
     key: 'move',
-    value: function move(piece, destination) {
+    value: function move(origin, destination) {
       var promote = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-      if (piece instanceof _cell2.default) piece = piece.piece;
+      origin = this.board.resolve(origin);
+      destination = this.board.resolve(destination);
 
-      if (this.over || !piece || piece.owner !== this.currentPlayer || promote && !this.promotable(piece, destination) || !this.movements(piece).includes(destination)) {
-        return false;
-      }
-
-      if (destination.piece) {
-        destination.piece.owner = piece.owner;
-        if (destination.piece.promoted) destination.piece.promoted = false;
-      }
-
-      var cell = this.board.cells.find(function (cell) {
-        return cell.piece === piece;
-      });
-      destination.piece = piece;
-      if (promote) piece.promoted = true;
-      if (cell) cell.piece = null;
-
-      this.reversePlayers();
-      return true;
+      return !this.over && origin.piece && origin.piece.owner === this.currentPlayer && (!promote || this.promotable(origin.piece, destination.cell)) && this.movements(origin.piece).includes(destination.cell) && this.board.move(origin.piece, destination.cell, promote) && this.reversePlayers() && true;
     }
   }, {
     key: 'movements',
-    value: function movements(piece, cell) {
+    value: function movements(origin) {
       var _this2 = this;
 
-      var checkmate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+      var checkmate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
-      if (piece instanceof _cell2.default) {
-        cell = piece;
-        piece = cell.piece;
-      }
+      var _board$resolve = this.board.resolve(origin),
+          piece = _board$resolve.piece,
+          cell = _board$resolve.cell;
 
-      if (!piece) return [];
-      if (!cell) cell = this.board.cells.find(function (cell) {
-        return cell.piece === piece;
-      });
+      var movements;
 
-      var movements = this['movementsFor' + (cell ? 'Used' : 'Captured')](piece, cell);
+      if (cell) movements = this.movementsForUsed(piece, cell);else movements = this.movementsForCaptured(piece);
 
       if (checkmate) {
-        this.clone(function (game) {
-          var clonedCell = cell ? game.board.cell(cell) : null;
-
-          movements = movements.filter(function (movement) {
-            game.board.cell(movement).piece = piece;
-            if (clonedCell) clonedCell.piece = null;
-
-            var isCheckCell = game.stateOf(piece.owner, false, true) !== _this2.constructor.states.normal;
-
-            return !isCheckCell;
+        movements = movements.filter(function (destination) {
+          return _this2.clone(function (game) {
+            game.board.move(cell || piece, destination);
+            return game.stateOf(piece.owner, false) === _this2.constructor.states.normal;
           });
         });
       }
@@ -1372,17 +1382,15 @@ var Game = function () {
     value: function movementsForUsed(piece, cell) {
       var _this3 = this;
 
-      var movements = [];
-
-      piece.movements.forEach(function (movement) {
-        new (Function.prototype.bind.apply(_iterator2.default, [null].concat([_this3.board, cell], _toConsumableArray(movement))))().forEach(function (movement) {
-          if (movement.piece && movement.piece.owner === piece.owner) return false;
-          if (!movement.piece || movement.piece.owner !== piece.owner) movements.push(movement);
-          if (movement.piece && movement.piece.owner !== piece.owner) return false;
+      return piece.movements.reduce(function (movements, movement) {
+        new (Function.prototype.bind.apply(_iterator2.default, [null].concat([_this3.board, cell], _toConsumableArray(movement))))().forEach(function (destination) {
+          if (destination.piece && destination.piece.owner === piece.owner) return false;
+          if (!destination.piece || destination.piece.owner !== piece.owner) movements.push(destination);
+          //if(destination.piece && destination.piece.owner !== piece.owner) return false
         });
-      });
 
-      return movements;
+        return movements;
+      }, []);
     }
   }, {
     key: 'movementsForCaptured',
@@ -1419,26 +1427,20 @@ var Game = function () {
   }, {
     key: 'promotable',
     value: function promotable(piece, destination) {
-      return piece.promotable && !piece.promoted && this.board.cells.find(function (cell) {
-        return cell.piece === piece;
-      }) && (piece.owner.jeweledGeneral && destination.y > this.board.height - 4 || piece.owner.kingGeneral && destination.y < 3);
+      return piece.promotable && !piece.promoted && this.board.cell(piece) && (piece.owner.jeweledGeneral && destination.y > this.board.height - 4 || piece.owner.kingGeneral && destination.y < 3);
     }
   }, {
     key: 'clone',
     value: function clone() {
-      var _this5 = this;
-
       var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
-      return this.board.clone(function (board, reset) {
-        var game = new _this5.constructor(_this5.player1, _this5.player2);
-        game.currentPlayer = _this5.currentPlayer;
-        game.board = board;
-        game.pieces = game.usedPieces.concat(_this5.capturedPieces.map(function (piece) {
-          return piece.clone();
-        }));
-        return callback ? callback.call(_this5, game, reset) : game;
-      });
+      var game = new this.constructor(this.player1, this.player2);
+      game.currentPlayer = this.currentPlayer;
+      game.board = this.board.clone();
+      game.pieces = game.usedPieces.concat(this.capturedPieces.map(function (piece) {
+        return piece.clone();
+      }));
+      return callback ? callback.call(this, game) : game;
     }
   }, {
     key: 'reversePlayers',

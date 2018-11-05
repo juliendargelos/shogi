@@ -1,4 +1,5 @@
 import Cell from './cell.js'
+import Piece from './piece.js'
 import Iterator from './iterator.js'
 
 class Board {
@@ -17,10 +18,7 @@ class Board {
   clone(callback = null) {
     var board = new this.constructor()
     board.cells = this.cells.map(cell => cell.clone())
-    var pieces = board.cells.map(cell => cell.piece)
-    var reset = () => board.cells.forEach((cell, index) => cell.piece = pieces[index])
-
-    return callback ? callback.call(this, board, reset) : board
+    return callback ? callback.call(this, board) : board
   }
 
   cell(x, y) {
@@ -33,6 +31,31 @@ class Board {
 
   col(x) {
     return this.cells.filter(cell => cell.x === x)
+  }
+
+  move(origin, destination, promote = false) {
+    origin = this.resolve(origin)
+    destination = this.resolve(destination)
+
+    if(!origin.piece || !destination.cell) return false
+
+    if(destination.piece) {
+      destination.piece.owner = origin.piece.owner
+      if(destination.piece.promoted) destination.piece.promoted = false
+    }
+
+    destination.cell.piece = origin.piece
+    if(promote) origin.piece.promoted = true
+    if(origin.cell) origin.cell.piece = null
+
+    return true
+  }
+
+  resolve(object) {
+    var cell = this.cell(object)
+    var piece = cell ? cell.piece : (object instanceof Piece ? piece : null)
+
+    return {cell, piece}
   }
 
   init({kingGeneral, jeweledGeneral}) {

@@ -94,55 +94,34 @@ class Game {
     })
   }
 
-  move(piece, destination, promote = false) {
-    if(piece instanceof Cell) piece = piece.piece
+  move(origin, destination, promote = false) {
+    origin = this.board.resolve(origin)
+    destination = this.board.resolve(destination)
 
-    if(
-      this.over ||
-      !piece ||
-      piece.owner !== this.currentPlayer ||
-      (promote && !this.promotable(piece, destination)) ||
-      !this.movements(piece).includes(destination)
-    ) {
-      return false
-    }
-
-    if(destination.piece) {
-      destination.piece.owner = piece.owner
-      if(destination.piece.promoted) destination.piece.promoted = false
-    }
-
-    var cell = this.board.cells.find(cell => cell.piece === piece)
-    destination.piece = piece
-    if(promote) piece.promoted = true
-    if(cell) cell.piece = null
-
-    this.reversePlayers()
-    return true
+    return (
+      !this.over &&
+      origin.piece &&
+      origin.piece.owner === this.currentPlayer &&
+      (!promote || this.promotable(origin.piece, destination.cell)) &&
+      this.movements(origin.piece).includes(destination.cell) &&
+      this.board.move(origin.piece, destination.cell, promote) &&
+      this.reversePlayers() &&
+      true
+    )
   }
 
-  movements(piece, cell, checkmate = true) {
-    if(piece instanceof Cell) {
-      cell = piece
-      piece = cell.piece
-    }
+  movements(origin, checkmate = true) {
+    var {piece, cell} = this.board.resolve(origin)
+    var movements
 
-    if(!piece) return []
-    if(!cell) cell = this.board.cells.find(cell => cell.piece === piece)
-
-    var movements = this[`movementsFor${cell ? 'Used' : 'Captured'}`](piece, cell)
+    if(cell) movements = this.movementsForUsed(piece, cell)
+    else movements = this.movementsForCaptured(piece)
 
     if(checkmate) {
-      this.clone(game => {
-        var clonedCell = cell ? game.board.cell(cell) : null
-
-        movements = movements.filter(movement => {
-          game.board.cell(movement).piece = piece
-          if(clonedCell) clonedCell.piece = null
-
-          var isCheckCell = game.stateOf(piece.owner, false, true) !== this.constructor.states.normal
-
-          return !isCheckCell
+      movements = movements.filter(destination => {
+        return this.clone(game => {
+          game.board.move(cell || piece, destination)
+          return game.stateOf(piece.owner, false) === this.constructor.states.normal
         })
       })
     }
@@ -151,17 +130,15 @@ class Game {
   }
 
   movementsForUsed(piece, cell) {
-    var movements = []
-
-    piece.movements.forEach(movement => {
-      new Iterator(this.board, cell, ...movement).forEach(movement => {
-        if(movement.piece && movement.piece.owner === piece.owner) return false
-        if(!movement.piece || movement.piece.owner !== piece.owner) movements.push(movement)
-        if(movement.piece && movement.piece.owner !== piece.owner) return false
+    return piece.movements.reduce((movements, movement) => {
+      new Iterator(this.board, cell, ...movement).forEach(destination => {
+        if(destination.piece && destination.piece.owner === piece.owner) return false
+        if(!destination.piece || destination.piece.owner !== piece.owner) movements.push(destination)
+        //if(destination.piece && destination.piece.owner !== piece.owner) return false
       })
-    })
 
-    return movements
+      return movements
+    }, [])
   }
 
   movementsForCaptured(piece) {
@@ -185,7 +162,7 @@ class Game {
     return (
       piece.promotable &&
       !piece.promoted &&
-      this.board.cells.find(cell => cell.piece === piece) &&
+      this.board.cell(piece) &&
       (
         (piece.owner.jeweledGeneral && destination.y > this.board.height - 4) ||
         (piece.owner.kingGeneral && destination.y < 3)
@@ -194,13 +171,11 @@ class Game {
   }
 
   clone(callback = null) {
-    return this.board.clone((board, reset) => {
-      var game = new this.constructor(this.player1, this.player2)
-      game.currentPlayer = this.currentPlayer
-      game.board = board
-      game.pieces = game.usedPieces.concat(this.capturedPieces.map(piece => piece.clone()))
-      return callback ? callback.call(this, game, reset) : game
-    })
+    var game = new this.constructor(this.player1, this.player2)
+    game.currentPlayer = this.currentPlayer
+    game.board = this.board.clone()
+    game.pieces = game.usedPieces.concat(this.capturedPieces.map(piece => piece.clone()))
+    return callback ? callback.call(this, game) : game
   }
 
   reversePlayers() {

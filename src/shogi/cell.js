@@ -13,6 +13,9 @@ class Cell {
   }
 
   at(x, y) {
+    if(x instanceof Piece) return this.piece === x
+    else if(Array.isArray(x)) [x, y] = x
+
     if(x !== null && (typeof x === 'object' || typeof x === 'function')) {
       y = x.y
       x = x.x
