@@ -587,17 +587,11 @@ var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var game = new _index2.default.Game('Jane', 'Serge').start();
+var game = new _index2.default.Game('Jane', 'Serge');
 
-// console.log(game.move(
-//   game.board.cell(0, 6),
-//   game.board.cell(0, 5)
-// ))
+game.start();
 
-console.log(game.board.cell(0, 6));
-console.log(game.movements(game.board.cell(0, 6)));
-
-//console.log(game.board.cell(0, 6), game.board.cell(0, 5))
+game.move(game.board.cell(0, 6), game.board.cell(0, 5));
 
 /***/ }),
 
@@ -1316,7 +1310,7 @@ var Game = function () {
     value: function move(piece, destination) {
       var promote = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-      if (piece instanceof _cell2.default) piece = cell.piece;
+      if (piece instanceof _cell2.default) piece = piece.piece;
       if (this.over || !piece || piece.owner !== this.currentPlayer || promote && !this.promotable(piece, destination) || !this.movements(piece).includes(destination)) return false;
 
       if (destination.piece) {

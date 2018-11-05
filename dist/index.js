@@ -3538,7 +3538,7 @@ var Game = function () {
     value: function move(piece, destination) {
       var promote = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-      if (piece instanceof _cell2.default) piece = cell.piece;
+      if (piece instanceof _cell2.default) piece = piece.piece;
       if (this.over || !piece || piece.owner !== this.currentPlayer || promote && !this.promotable(piece, destination) || !this.movements(piece).includes(destination)) return false;
 
       if (destination.piece) {
