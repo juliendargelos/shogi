@@ -1,7 +1,7 @@
 class Player {
   constructor(name) {
     this.name = name
-    var type;
+    var type
 
     Object.defineProperties(this, {
       type: {

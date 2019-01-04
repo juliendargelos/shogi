@@ -1,6 +1,6 @@
-const Path = require('path');
-const merge = require('webpack-merge');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const Path = require('path')
+const merge = require('webpack-merge')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const base = require('./config.base.js')
 const paths = require('./paths.js')
 
@@ -22,7 +22,7 @@ module.exports = merge(base, {
   optimization: {
     minimize: true,
     minimizer: [new UglifyJsPlugin({
-      include: /.min\.js$/
+      include: /\.min\.js$/
     })]
   }
-});
+})

@@ -1,5 +1,5 @@
-const Path = require('path');
-const merge = require('webpack-merge');
+const Path = require('path')
+const merge = require('webpack-merge')
 const base = require('./config.base.js')
 const paths = require('./paths')
 
@@ -18,4 +18,4 @@ module.exports = merge(base, {
   optimization: {
     minimize: false
   }
-});
+})

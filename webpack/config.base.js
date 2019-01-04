@@ -1,5 +1,5 @@
-const Path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const Path = require('path')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 const paths = require('./paths.js')
 
 module.exports = {
@@ -21,15 +21,10 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.mjs$/,
-        include: /node_modules/,
-        type: 'javascript/auto'
-      },
-      {
-        test: /\.(js)$/,
+        test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
         use: 'babel-loader'
       }
     ]
   }
-};
+}
